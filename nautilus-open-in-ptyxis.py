@@ -8,7 +8,7 @@ from gi import require_version
 require_version("Nautilus", "4.0")
 require_version("Gtk", "4.0")
 
-TERMINAL_NAME = "org.gnome.Ptyxis.Devel"
+TERMINAL_NAME = "app.devsuite.Ptyxis"
 
 import logging
 import os
@@ -93,11 +93,11 @@ class PtyxisNautilus(GObject.GObject, Nautilus.MenuProvider):
         logging.debug("Openning:", path)
         args = None
         if self.is_native()=="ptyxis-terminal":
-            args = ["ptyxis-terminal", "--new-window", "-d", path]
+            args = ["ptyxis-terminal", "--tab", "-d", path]
         elif self.is_native()=="ptyxis":
-            args = ["ptyxis", "--new-window", "-d", path]
+            args = ["ptyxis", "--tab", "-d", path]
         else:
-            args = ["/usr/bin/flatpak", "run", TERMINAL_NAME, "--new-window", "-d", path]
+            args = ["/usr/bin/flatpak", "run", TERMINAL_NAME, "--tab", "-d", path]
 
         subprocess.Popen(args, cwd=path)
 
